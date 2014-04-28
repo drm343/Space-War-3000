@@ -1,0 +1,80 @@
+Game of step
+---------------
+
+Set game grid in 8x8 board.
+
+1. roll dice, 1d6 + resourse is the "Action Point".
+2. Use "Action Point" to do some action until pass turn.
+3. If Victory then game end else Pass turn.
+
+
+Action Point and action step.
+---------------
+
+1. Build 1 ship or Colony 1 planet or Repair 1 Object.
+2. move or attack by use "Action Point", every Star Ship or Station can attack once in a turn.
+
+
+Ship type
+---------------
+
+1. Colony Ship, 1 point to build, 2 point to colony.
+2. Star Ship, 1 point to build, 1 point to attack in 1 grid, max 1 grid.
+3. Space Station, 2 point to build, 1 point to attack in 2 grid, max 2 grid, can't move.
+
+
+Homeworld data
+---------------
+
+1. Race name, User Defined.
+2. Victory condition.
+  A. Attack other Homeworld by twice.
+  B. Colony all colony.
+  C. Get Action Point big then 8.
+  D. Play 10 turn and Enemy do not win.
+3. Ship type distribute, User Defined.(max 5)
+4. Special Ability.(1 good and 1 bad)
+  Good:
+  A. Star Ship +1 max grid.
+  B. Space Station can build in Homeworld or Colony in 3 grid.
+  C. +1 resourse.
+  D. -1 colony.
+  Bad:
+  A. -1 resourse.
+  B. +1 to build.
+  C. +1 colony.
+5. +1 resourse.
+
+
+Colony data
+---------------
+
+1. Colony name.
+2. Special Ability.(1 good)
+
+
+MAP Rule
+---------------
+
+1. Map name.
+2. size 8x8.
+3. Random Homeworld and 3 Colony, at least 2 grid.
+4. Victory condition.
+
+
+Build Rule
+---------------
+
+1. Build in Homeworld or Colony in 1 grid.
+2. Can't in the same grid.
+3. Space Station can build in Homeworld or Colony in 2 grid.
+
+
+Attack Rule
+---------------
+
+1. If ship be attacked, then ship destroyed.
+2. If Colony be attacked, then colony lose Special Ability and Action Point, attacked twice then Colony destroyed
+   repair by 2 Action Point.
+3. If Station be attacked, then max grid - 1, attacked twice then Station destroyed, repair by 2 Action Point.
+4. If Homeworld be attacked, then lose good Special Ability, repair by 3 Action Point.

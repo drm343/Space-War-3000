@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+function objgen {
+  gcc -c $1.adb
+}
+
+function cleanroom {
+  rm -rf ./*o
+  rm -rf ./*ali
+}
+
+function main {
+  fileName=$1
+  gcc -c $fileName.adb && \
+  gnatbind $fileName && \
+  gnatlink $fileName
+}
+
+#-----------------------------------------------
+# main
+#-----------------------------------------------
+
+objgen shiptype
