@@ -20,4 +20,11 @@ function main {
 # main
 #-----------------------------------------------
 
-objgen shiptype
+if [ $1 ]
+then
+  cleanroom
+  echo "run out"
+else
+  objgen ship
+  main main
+fi
