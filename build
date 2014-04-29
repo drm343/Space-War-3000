@@ -7,6 +7,7 @@ function objgen {
 function cleanroom {
   rm -rf ./*o
   rm -rf ./*ali
+  rm main
 }
 
 function main {
@@ -26,5 +27,6 @@ then
   echo "run out"
 else
   objgen ship
+  objgen planet
   main main
 fi

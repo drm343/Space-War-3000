@@ -2,22 +2,22 @@ package body ship is
   --------------------------------------
   -- Build Ship
   --------------------------------------
-  function is_Colony return ShipData is
-    result: ShipData := (Colony, 1, 2, 0, 0);
+  function is_Colony return Ship_Data is
+    result: Ship_Data := (Colony, 1, 2, 0, 0);
   begin
     return result;
   end is_Colony;
 
   --------------------------------------
-  function is_StarShip return ShipData is
-    result: ShipData := (StarShip, 1, 0, 1, 1);
+  function is_StarShip return Ship_Data is
+    result: Ship_Data := (StarShip, 1, 0, 1, 1);
   begin
     return result;
   end is_StarShip;
 
   --------------------------------------
-  function is_Station return ShipData is
-    result: ShipData := (Station, 2, 0, 2, 2);
+  function is_Station return Ship_Data is
+    result: Ship_Data := (Station, 2, 0, 2, 2);
   begin
     return result;
   end is_Station;
@@ -25,12 +25,12 @@ package body ship is
   --------------------------------------
   -- ShipData Operator
   --------------------------------------
-  function show_me_shiptype (ship: in ShipData) return String is
+  function show_me_ship_type (ship: in Ship_Data) return String is
   begin
-    return ShipType'Image (ship.name);
-  end show_me_shiptype;
+    return Ship_Type'Image (ship.name);
+  end show_me_ship_type;
 
-  function show_me_shipdata (ship: in ShipData; modify: in ShipModify) return Integer is
+  function show_me_ship_data (ship: in Ship_Data; modify: in Ship_Modify) return Integer is
   begin
     case modify is
       when colony => return ship.colony;
@@ -38,9 +38,9 @@ package body ship is
       when max => return ship.max;
       when others => return ship.build;
     end case;
-  end show_me_shipdata;
+  end show_me_ship_data;
 
-  procedure modify_shipdata (ship: in out ShipData; modify: in ShipModify; num: Integer) is
+  procedure modify_ship_data (ship: in out Ship_Data; modify: in Ship_Modify; num: Integer) is
   begin
     case modify is
       when colony => ship.colony := ship.colony + num;
@@ -48,5 +48,5 @@ package body ship is
       when max => ship.max := ship.max + num;
       when others => ship.build := ship.build + num;
     end case;
-  end modify_shipdata;
+  end modify_ship_data;
 end ship;

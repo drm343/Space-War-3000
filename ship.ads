@@ -1,22 +1,22 @@
 package ship is
-  type ShipType is Private;
-  type ShipData is Private;
-  type ShipModify is (build, colony, grid, max);
+  type Ship_Type is Private;
+  type Ship_Data is Private;
+  type Ship_Modify is (build, colony, grid, max);
 
-  function is_Colony return ShipData;
-  function is_StarShip return ShipData;
-  function is_Station return ShipData;
+  function is_Colony return Ship_Data;
+  function is_StarShip return Ship_Data;
+  function is_Station return Ship_Data;
 
-  function show_me_shiptype (ship: in ShipData) return String;
-  function show_me_shipdata (ship: in ShipData; modify: in ShipModify) return Integer;
-  procedure modify_shipdata (ship: in out ShipData; modify: in ShipModify; num: Integer);
+  function show_me_ship_type (ship: in Ship_Data) return String;
+  function show_me_ship_data (ship: in Ship_Data; modify: in Ship_Modify) return Integer;
+  procedure modify_ship_data (ship: in out Ship_Data; modify: in Ship_Modify; num: Integer);
 
   Private
-  type ShipType is (Colony, StarShip, Station);
+  type Ship_Type is (Colony, StarShip, Station);
 
-  type ShipData is
+  type Ship_Data is
     record
-      name: ShipType;
+      name: Ship_Type;
       build: Integer;
       colony: Integer;
       grid: Integer;
