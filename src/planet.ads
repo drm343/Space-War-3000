@@ -1,4 +1,4 @@
-package planet is
+package Planet is
   type Planet_Data (is_colony: Boolean := true) is Private;
 
   type Victory is (military, colony, economy, peace);
@@ -13,7 +13,8 @@ package planet is
 --
 --  type Planet_Modify is Private;
 
-  function build_planet (race: String; victory_condition: Victory; colony: Integer; starship: Integer; station: Integer; good_ability: Good_Type; bad_ability: Bad_Type) return Planet_Data;
+  function build_planet (race: String; victory_condition: Victory; colony: Integer;
+                          starship: Integer; station: Integer; good_ability: Good_Type; bad_ability: Bad_Type) return Planet_Data;
   function build_planet (race: String; good_ability: Good_Type) return Planet_Data;
 
   function show_me_planet_data (planet: in Planet_Data; modify: in Planet_Modify) return String;

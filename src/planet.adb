@@ -1,4 +1,4 @@
-package body planet is
+package body Planet is
   -----------------------
   -- Build
   -----------------------
