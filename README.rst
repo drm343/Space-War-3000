@@ -6,4 +6,4 @@ Write a turn-based space game.
 Build Object file
 ----------------
 
-./build
+gprbuild space3k.gpr
