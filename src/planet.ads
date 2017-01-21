@@ -1,39 +1,40 @@
+with Ada.Strings.Unbounded;
+
+with Rule; use Rule;
+
 package Planet is
-  type Planet_Data (is_colony: Boolean := true) is Private;
+   package SU renames Ada.Strings.Unbounded;
 
-  type Victory is (military, colony, economy, peace);
-  type Good_Type is (starship_power, station_build, more_resource, easy_colony);
-  type Bad_Type is (less_resource, hard_build, hard_colony);
+   type Object (build_homeworld : Boolean) is tagged private;
 
-  type Planet_Modify is (race, victory_condition, good_ability, bad_ability, damage, ship, is_colony);
+   function Build (colony: Integer; starship: Integer; station: Integer)
+                   return Object;
 
---  type Victory is Private;
---  type Good_Type is Private;
---  type Bad_Type is Private;
---
---  type Planet_Modify is Private;
+   function Build (race: String; victory_condition: Victory; colony: Integer;
+                   starship: Integer; station: Integer; good_ability: Good_Type;
+                   bad_ability: Bad_Type)
+                   return Object;
 
-  function build_planet (race: String; victory_condition: Victory; colony: Integer;
-                          starship: Integer; station: Integer; good_ability: Good_Type; bad_ability: Bad_Type) return Planet_Data;
-  function build_planet (race: String; good_ability: Good_Type) return Planet_Data;
 
-  function show_me_planet_data (planet: in Planet_Data; modify: in Planet_Modify) return String;
-  procedure attack_planet (planet: in out Planet_Data);
+   function show (planet: in Object) return String;
+   procedure attack (planet: in out Object);
+private
+   type Object (build_homeworld : Boolean) is tagged
+      record
+         Damage: Boolean;
+         Colony: Integer;
+         Starship: Integer;
+         Station: Integer;
+         is_homeworld : Boolean := build_homeworld;
 
-  Private
-  type Planet_Data (is_colony: Boolean := true) is
-    record
-      race: String (1 .. 20);
-      good_ability: Good_Type;
-      damage: Boolean;
-      case is_colony is
-        when false =>
-          victory_condition: Victory;
-          colony: Integer;
-          starship: Integer;
-          station: Integer;
-          bad_ability: Bad_Type;
-        when others => null;
-      end case;
-    end record;
+         case build_homeworld is
+            when true =>
+               Race: SU.Unbounded_String;
+               Good_Ability: Good_Type;
+               Bad_Ability: Bad_Type;
+               Victory_Condition: Victory;
+            when others =>
+               null;
+         end case;
+      end record;
 end planet;
