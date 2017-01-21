@@ -1,3 +1,4 @@
+with Ada.Containers.Vectors;
 with Ada.Strings.Unbounded;
 
 with Rule; use Rule;
@@ -5,36 +6,43 @@ with Rule; use Rule;
 package Planet is
    package SU renames Ada.Strings.Unbounded;
 
-   type Object (build_homeworld : Boolean) is tagged private;
+   package Origin_Define is
+      type Object is tagged private;
 
-   function Build (colony: Integer; starship: Integer; station: Integer)
+      function Build (name     : String;
+                      colony   : Integer;
+                      starship : Integer;
+                      station  : Integer)
                    return Object;
 
-   function Build (race: String; victory_condition: Victory; colony: Integer;
-                   starship: Integer; station: Integer; good_ability: Good_Type;
-                   bad_ability: Bad_Type)
-                   return Object;
+      function "=" (Left, Right : Object) return Boolean;
 
+      function show (planet: in Object) return String;
+      procedure attack (planet: in out Object);
+   private
+      type Object is tagged
+         record
+            Name : SU.Unbounded_String;
+            Damage: Boolean;
+            Colony: Integer;
+            Starship: Integer;
+            Station: Integer;
+         end record;
+   end Origin_Define;
 
-   function show (planet: in Object) return String;
-   procedure attack (planet: in out Object);
-private
-   type Object (build_homeworld : Boolean) is tagged
-      record
-         Damage: Boolean;
-         Colony: Integer;
-         Starship: Integer;
-         Station: Integer;
-         is_homeworld : Boolean := build_homeworld;
+   subtype Object is Origin_Define.Object;
+   function Build (name     : String;
+                   colony   : Integer;
+                   starship : Integer;
+                   station  : Integer)
+                   return Object
+   renames Origin_Define.Build;
 
-         case build_homeworld is
-            when true =>
-               Race: SU.Unbounded_String;
-               Good_Ability: Good_Type;
-               Bad_Ability: Bad_Type;
-               Victory_Condition: Victory;
-            when others =>
-               null;
-         end case;
-      end record;
-end planet;
+   subtype Planet_Range is Positive range 1 .. 10;
+   package Vectors is new Ada.Containers.Vectors
+     (Element_Type => Origin_Define.Object,
+      Index_Type => Planet_Range,
+      "=" => Origin_Define."=");
+
+   subtype Vector is Vectors.Vector;
+end Planet;
